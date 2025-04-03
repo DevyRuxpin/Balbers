@@ -3,9 +3,9 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from apscheduler.schedulers.background import BackgroundScheduler
-from config import Config
-from models import db
-import auth, crypto, alerts
+from .config import Config
+from .models import db
+import .auth, .crypto, .alerts
 
 def create_app():
     app = Flask(__name__)
@@ -28,21 +28,10 @@ def create_app():
         scheduler.add_job(func=alerts.check_alerts, trigger='interval', minutes=5)
         scheduler.start()
     
-    # CLI commands
-    @app.cli.command()
-    def deploy():
-        """Run deployment tasks."""
-        from flask_migrate import upgrade
-        upgrade()
-    
-    @app.cli.command()
-    def check_alerts():
-        """Run alert checks manually."""
-        alerts.check_alerts()
-    
     return app
 
 app = create_app()
 
 if __name__ == '__main__':
     app.run()
+
