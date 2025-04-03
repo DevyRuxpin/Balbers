@@ -4,7 +4,8 @@ from urllib.parse import urlparse
 def get_database_uri():
     uri = os.environ.get('DATABASE_URL')
     if uri and uri.startswith('postgres://'):
-        uri = uri.replace('postgres://', 'postgresql://', 1)
+        parsed = urlparse(uri)
+        return f"postgresql://{parsed.username}:{parsed.password}@{parsed.hostname}:{parsed.port}/{parsed.path.lstrip('/')}"
     return uri
 
 class Config:
