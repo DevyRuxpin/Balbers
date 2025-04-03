@@ -1,4 +1,5 @@
 from flask import Flask
+from werkzeug.urls import url_encode
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
