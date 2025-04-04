@@ -17,7 +17,7 @@ COPY backend/ /app/backend
 ENV DATABASE_URL=postgresql://balbers:Ve9BUEk8yqiZEBOrUXzJFqcrlSoGL5ol@dpg-cvngaq7diees73busi20-a/balbers_i8o8
 
 # Expose the port the app runs on
-EXPOSE 8000
+EXPOSE 10000
 
 # Make sure the build.sh script is executable
 RUN chmod +x /app/backend/build.sh
