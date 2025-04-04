@@ -1,9 +1,10 @@
 services:
   - type: web
     name: balbers-backend
-    runtime: python
-    buildCommand: "chmod +x backend/build.sh && cd backend && ./build.sh"
-    startCommand: "PYTHONPATH=./backend gunicorn --worker-tmp-dir /dev/shm backend.app:app"
+    env: docker
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    startCommand: ""
     envVars:
       - key: DATABASE_URL
         value: postgresql://balbers:Ve9BUEk8yqiZEBOrUXzJFqcrlSoGL5ol@dpg-cvngaq7diees73busi20-a/balbers_i8o8
