@@ -17,6 +17,3 @@ flask db migrate -m "Initial migration."
 
 # Apply the migration to the database
 flask db upgrade
-
-
-chmod +x build.sh
