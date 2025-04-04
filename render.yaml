@@ -3,11 +3,10 @@ services:
     name: balbers-backend
     runtime: python
     buildCommand: "cd backend && ./build.sh"
-    startCommand: "PYTHONPATH=./backend gunicorn --worker-tmp-dir /dev/shm app:app"
+    startCommand: "PYTHONPATH=./backend gunicorn --worker-tmp-dir /dev/shm backend.app:app"
     envVars:
       - key: DATABASE_URL
         value: postgresql://balbers:Ve9BUEk8yqiZEBOrUXzJFqcrlSoGL5ol@dpg-cvngaq7diees73busi20-a/balbers_i8o8
-          
       - key: SECRET_KEY
         generateValue: true
       - key: JWT_SECRET_KEY
@@ -31,4 +30,3 @@ databases:
     plan: free
     databaseName: balbers
     user: balbers
-  
