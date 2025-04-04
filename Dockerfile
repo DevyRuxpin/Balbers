@@ -26,4 +26,4 @@ RUN chmod +x /app/backend/build.sh
 RUN /app/backend/build.sh
 
 # Command to run the application
-CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", "backend.app:app", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", "backend.app:app", "--bind", "0.0.0.0:10000"]
