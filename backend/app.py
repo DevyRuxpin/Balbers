@@ -3,9 +3,9 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from apscheduler.schedulers.background import BackgroundScheduler
-from backend.config import Config
-from backend.models import db
-from backend import auth, crypto, alerts
+from .config import Config
+from .models import db
+from . import auth, crypto, alerts
 
 def create_app():
     app = Flask(__name__)
