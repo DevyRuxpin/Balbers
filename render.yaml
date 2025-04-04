@@ -3,8 +3,8 @@ services:
     name: balbers-backend
     env: docker
     dockerfilePath: ./Dockerfile
-    buildCommand: ""
-    startCommand: ""
+    buildCommand: "echo 'Build step handled by Dockerfile'"
+    startCommand: "echo 'Start step handled by Dockerfile'"
     envVars:
       - key: DATABASE_URL
         value: postgresql://balbers:Ve9BUEk8yqiZEBOrUXzJFqcrlSoGL5ol@dpg-cvngaq7diees73busi20-a/balbers_i8o8
