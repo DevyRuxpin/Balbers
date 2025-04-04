@@ -2,7 +2,7 @@ services:
   - type: web
     name: balbers-backend
     runtime: python
-    buildCommand: "cd backend && ./build.sh"
+    buildCommand: "chmod +x backend/build.sh && cd backend && ./build.sh"
     startCommand: "PYTHONPATH=./backend gunicorn --worker-tmp-dir /dev/shm backend.app:app"
     envVars:
       - key: DATABASE_URL
