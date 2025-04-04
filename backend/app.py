@@ -21,6 +21,11 @@ def create_app():
     app.register_blueprint(auth.bp)
     app.register_blueprint(crypto.bp)
     app.register_blueprint(alerts.bp)
+
+    # Health check endpoint
+    @app.route("/api/v3/ping")
+    def ping():
+        return "pong", 200
     
     # Schedule background tasks in production
     if not app.debug and not app.testing:
