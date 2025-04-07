@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from apscheduler.schedulers.background import BackgroundScheduler
+import os
 from backend.config import Config
 from backend.models import db
 from backend import auth, crypto, alerts
@@ -37,6 +38,7 @@ def create_app():
 
 app = create_app()
 
+# Explicit port binding for Render
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host='0.0.0.0', port=port)
