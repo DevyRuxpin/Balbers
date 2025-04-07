@@ -4,8 +4,6 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     buildCommand: ./backend/build.sh
-    startCommand: gunicorn --worker-tmp-dir /dev/shm backend.a:app --bind 0.0.0.0:10000
-    port: 10000
     envVars:
       - key: DATABASE_URL
         value: postgresql://balbers:Ve9BUEk8yqiZEBOrUXzJFqcrlSoGL5ol@dpg-cvngaq7diees73busi20-a/balbers_i8o8
