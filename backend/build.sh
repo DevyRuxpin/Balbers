@@ -4,27 +4,33 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-# Install dependencies (with cache)
+# Install dependencies
 pip install --cache-dir=.pip-cache -r requirements.txt
 
-# Only run migrations if this is the web service (not needed for workers)
+# Only run migrations for web service
 if [ "$SERVICE_TYPE" = "web" ]; then
-    # Wait for database to be ready (important for Render)
-    while ! python -c "import os; from sqlalchemy import create_engine; engine = create_engine(os.getenv('DATABASE_URL')); engine.connect()" 2>/dev/null; do
-        echo "Waiting for database to become available..."
+    # Wait for database
+    while ! python -c "
+import os
+from sqlalchemy import create_engine
+engine = create_engine(os.getenv('DATABASE_URL'))
+engine.connect()
+" 2>/dev/null; do
+        echo "⌛ Waiting for database..."
         sleep 2
     done
 
-    # Initialize migrations if needed
+    # Initialize and run migrations
     if [ ! -d "migrations" ]; then
         flask db init
     fi
-
-    # Run migrations (skip if already up to date)
+    
     flask db upgrade
 
-    # Only create new migration if this is development
+    # Development-only migration
     if [ "${ENVIRONMENT:-production}" != "production" ]; then
-        flask db migrate -m "Initial migration."
+        flask db migrate -m "Initial migration"
     fi
 fi
+
+echo "✅ Build completed successfully"
