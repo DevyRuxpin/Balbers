@@ -6,25 +6,12 @@ services:
     dockerfilePath: ./Dockerfile
     buildCommand: ./backend/build.sh
     envVars:
-      - key: SERVICE_TYPE
-        value: web
-      - key: ENVIRONMENT
-        value: production
-      - key: DATABASE_URL
-        fromDatabase:
-          name: balbers-db
-          property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
-      - key: JWT_SECRET_KEY
-        generateValue: true
-      - key: MAILGUN_API_KEY
-        sync: false
-      - key: MAILGUN_DOMAIN
-        sync: false
       - key: PORT
         value: 10000
-    healthCheckPath: /api/v3/ping
+      - key: BIND_ADDRESS
+        value: 0.0.0.0
+    healthCheckPath: /port-check
+    healthCheckTimeout: 10
     autoDeploy: true
 
   - type: web
