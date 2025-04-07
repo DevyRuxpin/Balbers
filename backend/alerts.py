@@ -5,6 +5,7 @@ import requests
 from datetime import datetime
 from sqlalchemy.exc import SQLAlchemyError
 
+BINANCE_API = 'https://data-api.binance.vision/api/v3'
 bp = Blueprint('alerts', __name__)
 
 @bp.route('/alerts', methods=['GET'])
