@@ -16,8 +16,9 @@ COPY backend/ /app/backend
 # Set the environment variables
 ENV DATABASE_URL=postgresql://balbers:Ve9BUEk8yqiZEBOrUXzJFqcrlSoGL5ol@dpg-cvngaq7diees73busi20-a/balbers_i8o8
 
-# Expose the port the app runs on
-EXPOSE 10000
+# Explicitly declare the port
+ENV PORT=10000
+EXPOSE $PORT
 
 # Make sure the build.sh script is executable
 RUN chmod +x /app/backend/build.sh
@@ -26,4 +27,4 @@ RUN chmod +x /app/backend/build.sh
 RUN /app/backend/build.sh
 
 # Command to run the application
-CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", "backend.app:app", "--bind", "0.0.0.0:10000"]
+CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", "backend.a:app", "--bind", "0.0.0.0:${PORT}"]
