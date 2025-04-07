@@ -89,7 +89,7 @@ def check_alerts():
             for alert in active_alerts:
                 try:
                     price_res = requests.get(
-                        f'https://api.binance.com/api/v3/ticker/price?symbol={alert.crypto_symbol}',
+                        f'{BINANCE_API}/ticker/price?symbol={alert.crypto_symbol}',
                         timeout=5
                     )
                     price_res.raise_for_status()
@@ -102,16 +102,16 @@ def check_alerts():
                         
                         # Send email notification
                         requests.post(
-                             "https://api.mailgun.net/v3/YOUR_DOMAIN/messages",
-                             auth=("api", current_app.config['MAILGUN_API_KEY']),
-                             data={
-                                 "from": "Balbers Alerts <alerts@balbers.com>",
-                                 "to": [user.email],
-                                 "subject": f"Price alert for {alert.crypto_symbol}",
-                                 "text": f"The price of {alert.crypto_symbol} has reached your target of {alert.target_price}"
-                             },
-                             timeout=10
-                         )
+                            "https://api.mailgun.net/v3/YOUR_DOMAIN/messages",
+                            auth=("api", current_app.config['MAILGUN_API_KEY']),
+                            data={
+                                "from": "Balbers Alerts <alerts@balbers.com>",
+                                "to": [user.email],
+                                "subject": f"Price alert for {alert.crypto_symbol}",
+                                "text": f"The price of {alert.crypto_symbol} has reached your target of {alert.target_price}"
+                            },
+                            timeout=10
+                        )
                         
                         alert.is_active = False
                         db.session.commit()
