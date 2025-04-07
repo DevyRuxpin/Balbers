@@ -2,6 +2,7 @@ services:
   - type: web
     name: balbers-backend
     env: docker
+    plan: free
     dockerfilePath: ./Dockerfile
     buildCommand: ./backend/build.sh
     envVars:
@@ -10,7 +11,9 @@ services:
       - key: ENVIRONMENT
         value: production
       - key: DATABASE_URL
-        value: postgresql://balbers:Ve9BUEk8yqiZEBOrUXzJFqcrlSoGL5ol@dpg-cvngaq7diees73busi20-a/balbers_i8o8
+        fromDatabase:
+          name: balbers-db
+          property: connectionString
       - key: SECRET_KEY
         generateValue: true
       - key: JWT_SECRET_KEY
@@ -19,7 +22,10 @@ services:
         sync: false
       - key: MAILGUN_DOMAIN
         sync: false
+      - key: PORT
+        value: 10000
     healthCheckPath: /api/v3/ping
+    autoDeploy: true
 
   - type: web
     name: balbers-frontend
