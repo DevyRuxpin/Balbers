@@ -5,6 +5,10 @@ services:
     dockerfilePath: ./Dockerfile
     buildCommand: ./backend/build.sh
     envVars:
+      - key: SERVICE_TYPE
+        value: web
+      - key: ENVIRONMENT
+        value: production
       - key: DATABASE_URL
         value: postgresql://balbers:Ve9BUEk8yqiZEBOrUXzJFqcrlSoGL5ol@dpg-cvngaq7diees73busi20-a/balbers_i8o8
       - key: SECRET_KEY
